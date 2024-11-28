@@ -14,14 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('profiles', function (Blueprint $table) {
-           
+
                 $table->id();
                 $table->string('FirstName');
                 $table->string('LastName');
                 $table->string('Username')->unique();
                 $table->string('Phone'); // Changement en string
                 $table->string('email')->unique();
-                $table->string('password');
+                $table->string('password')->nullable();
+                // $table->string('google_id')->nullable();
                 $table->timestamps(); // Ajout de timestamps
             });
     }

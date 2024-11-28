@@ -1,6 +1,6 @@
 @extends('layout.admin')
 @section('admin')
-     
+
          <style>
             .bienvenue{
   top: -30px;
@@ -89,7 +89,7 @@ a{
 .cardBox .card .iconBx {
   font-size: 80px;
     color: #f00;
-    position: relative;
+    position: forrelative;
     top: 30px;
 }
 
@@ -138,7 +138,7 @@ a{
     </div>
 
     <div class="iconBx">
-        <ion-icon name="archive-outline"></ion-icon>  
+        <ion-icon name="archive-outline"></ion-icon>
          </div>
 
 </div>

@@ -15,11 +15,15 @@ class profile extends Model
     'Phone',
     'email',
    'password',
-    
+
   ];
   public function formulair()
     {
         return $this->hasMany(Formulair::class, 'profil_id','id');
+    }
+  public function company()
+    {
+        return $this->belongsTo(Company::class, 'profil_id');
     }
 
 }

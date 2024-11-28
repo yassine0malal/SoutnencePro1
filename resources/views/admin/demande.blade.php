@@ -3,7 +3,7 @@
 
 
   <style>
-    
+
 
 @media print {
  .table, .table__body {
@@ -18,13 +18,13 @@
 
 
 main.table {
-    
+
     height: 90vh;
     margin-left: 10px;
     margin-top: 40px;
 
     backdrop-filter: blur(7px);
-    
+
     border-radius: .8rem;
 
     overflow: hidden;
@@ -39,7 +39,7 @@ main.table {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
 .table__header .input-group {
@@ -99,7 +99,7 @@ main.table {
     visibility: hidden;
 }
 
-.table__body:hover::-webkit-scrollbar-thumb{ 
+.table__body:hover::-webkit-scrollbar-thumb{
     visibility: visible;
 }
 
@@ -111,7 +111,7 @@ table {
 td img {
     width: 36px;
     height: 36px;
-  
+
     border-radius: 50%;
     margin-right: .5rem;
     vertical-align: middle;
@@ -207,10 +207,10 @@ thead th span.icon-arrow {
     height: 1.3rem;
     border-radius: 50%;
     border: 1.4px solid transparent;
-    
+
     text-align: center;
     font-size: 1rem;
-    
+
     margin-left: .5rem;
     transition: .2s ease-in-out;
 }
@@ -469,8 +469,8 @@ button:hover {
     </script>
 @endif
     <main class="table" id="customers_table">
-     
-    
+
+
         <section class="table__body">
             <table>
                 <thead>
@@ -484,12 +484,12 @@ button:hover {
                         <th>description</th>
                         <th></th>
                         <th></th>
-                        
-                        
+
+
                     </tr>
                 </thead>
                 <tbody>
-                    @if(auth()->check()) 
+                    @if(auth()->check())
                     @foreach($formule as $formule)
                         <tr>
                             <td>{{$formule->profile->Username}}</td>
@@ -499,19 +499,19 @@ button:hover {
                             <td>{{ $formule->destination }}</td>
                             <td>{{ $formule->date }}</td>
                             <td>{{ $formule->description }}</td>
-                         
+
                             <td>
                                 <form action="{{route('valid',$formule->id)}}" method="POST">
                                     @csrf
                                     @method('PATCH')
                         <button class="buttonn">
-                
-                    
-                    
+
+
+
                     <div class="text">
                       Valid
                     </div>
-                  
+
                   </button>
                 </form>
                      </td>
@@ -526,20 +526,20 @@ button:hover {
                                 <span class="tooltiptext">Refuser</span>
                               </button>
                         </form>
-                    
+
                        </td>
-                    
-  
- 
-                         
-                           
+
+
+
+
+
                         </tr>
-                        
+
                     @endforeach
                 @endif
                 </tbody>
             </table>
         </section>
     </main>
-    
+
     @endsection

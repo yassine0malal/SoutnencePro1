@@ -4,14 +4,14 @@
 
 <head>
     <meta charset="UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="assets/css/style.css">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
 
 </head>
 <style>
@@ -28,7 +28,7 @@
 }
 
 :root {
-  --blue:  #08145a;
+  --blue:  #007BFF;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
@@ -331,6 +331,7 @@ body {
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation">
+
             <ul>
                 <li>
                     <a href="#">
@@ -349,7 +350,7 @@ body {
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-              
+
                     <li>
                     <a href="{{route('solde')}}">
                         <span class="icon">
@@ -357,7 +358,7 @@ body {
 
                         </span>
 
-                        
+
                         <span class="title">Soldes</span>
                     </a>
                 </li>
@@ -376,7 +377,7 @@ body {
                       <span class="title">Arrchive</span>
                   </a>
               </li>
-               
+
               <li>
                 <a href="{{route('companysolde')}}">
                     <span class="icon">
@@ -386,7 +387,7 @@ body {
                 </a>
             </li>
 
-            
+
 
             <li>
               <a href="{{route('user')}}">
@@ -395,15 +396,15 @@ body {
 
                   </span>
 
-                  
-                  <span class="title">User</span>
+
+                  <span class="title">Users</span>
               </a>
           </li>
-                   
 
-                
 
-                
+
+
+
                 <li>
                     <a href="{{route('logoutadmin')}}">
                         <span class="icon">
@@ -412,6 +413,8 @@ body {
                         <span class="title">Déconnexion</span>
                     </a>
                 </li>
+
+
             </ul>
         </div>
 
@@ -422,13 +425,13 @@ body {
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
 
-               
 
-                
+
+
             </div>
 
             <!-- ======================= Cards ================== -->
-       
+
            @yield('admin')
 
     <!-- =========== Scripts =========  -->

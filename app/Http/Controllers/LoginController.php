@@ -27,8 +27,9 @@ public function registerPost(Request $request){
         'email' => 'required|unique:profiles',
         'password' => 'required|min:8',
     ]);
-    
+
     // Assigner les valeurs des champs
+
     $profile->FirstName = $request->input('FirstName');
     $profile->LastName = $request->input('LastName');
     $profile->Username = $request->input('Username');
@@ -38,7 +39,7 @@ public function registerPost(Request $request){
 
     // Sauvegarder l'utilisateur
     $profile->save();
-    Mail::to($profile->email)->send(new gmail($profile));
+    // Mail::to($profile->email)->send(new gmail($profile));
     return back()->with('success','successfully');
 }
 public function login(){

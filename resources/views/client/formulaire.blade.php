@@ -43,7 +43,7 @@ flex-wrap: wrap;
 }
 form .fields .input-field{
 display: flex;
-width: calc(100% / 2 - 15px); 
+width: calc(100% / 2 - 15px);
 flex-direction: column;
 margin: 8px 0;
 margin-left: 10px;
@@ -145,12 +145,12 @@ width: 160%;
 <body>
 <div class="container-form">
 <header>Dépenses</header>
-<form action="{{ route('formulaire.post') }}" method="POST" class="form"> 
+<form action="{{ route('formulaire.post') }}" method="POST" class="form">
     @csrf
-  
+
     <div class="form first">
         <div class="info personal">
-          
+
             <div class="fields">
                 <div class="input-field">
                     <label>Nom d'Entreprise</label>
@@ -159,30 +159,41 @@ width: 160%;
                         <option>Sofamel</option>
                         <option>Bitmar</option>
                         <option>Lux Lighting</option>
-                        <option>Marcont</option>
                         <option>Madin Technologies</option>
                         <option>Madin Immobilier</option>
+                        {{-- <option>Marcont</option>
                         <option>Neoplus</option>
                         <option>Switch Electric</option>
-                        <option>PEC Group</option>
+                        <option>PEC Group</option> --}}
                     </select>
                 </div>
                 <div class="input-field">
                     <label>Budget</label>
         <input name="budget" type="text" placeholder="Budget(DH)" />
                 </div>
-              
-              
+
+
                   <div class="input-field">
                     <label>Collaborateur</label>
                     <input name="collaborator" type="text" placeholder="Collaborateur" />
                 </div>
-             
-               
-                  <div class="input-field pro">
+
+
+                  {{-- <div class="input-field pro">
                     <label>Destination</label>
                     <input name="destination" type="text" placeholder="Destination" />
-                </div>            
+                </div> --}}
+
+                <div class="input-field">
+                    <label>Destination</label>
+                    <select name="Destination">
+                        <option hidden>Destination</option>
+                        <option>Boznika</option>
+                        <option>Cartiee indestriual medionna </option>
+                        <option>Rabat</option>
+                    </select>
+                </div>
+
                         <div class="input-field pro">
                             <label>Date</label>
                             <input name="date" type="date" placeholder="Enter date" />

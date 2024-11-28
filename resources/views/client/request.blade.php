@@ -3,7 +3,7 @@
 
 
   <style>
-    
+
 
 @media print {
  .table, .table__body {
@@ -18,13 +18,13 @@
 
 
 main.table {
-    
+
     height: 90vh;
     margin-left: 10px;
     margin-top: 40px;
 
     backdrop-filter: blur(7px);
-    
+
     border-radius: .8rem;
 
     overflow: hidden;
@@ -81,7 +81,6 @@ main.table {
 
     margin: .8rem auto;
     border-radius: .6rem;
-
     overflow: auto;
     overflow: overlay;
 }
@@ -98,7 +97,7 @@ main.table {
     visibility: hidden;
 }
 
-.table__body:hover::-webkit-scrollbar-thumb{ 
+.table__body:hover::-webkit-scrollbar-thumb{
     visibility: visible;
 }
 
@@ -110,7 +109,7 @@ table {
 td img {
     width: 36px;
     height: 36px;
-  
+
     border-radius: 50%;
     margin-right: .5rem;
     vertical-align: middle;
@@ -125,8 +124,10 @@ thead th {
     position: sticky;
     top: 0;
     left: 0;
-    background-color:rgba(0, 17, 175, 0.267);
+    background-color:rgb(18,29,96);
     cursor: pointer;
+    z-index: 1;
+    color: #fff;
     text-transform: capitalize;
 }
 
@@ -166,7 +167,7 @@ tbody tr.hide td img {
     width: 0;
     height: 0;
     transition: .2s ease-in-out .5s;
-}
+    }
 
 .status {
     padding: .4rem 0;
@@ -205,10 +206,10 @@ thead th span.icon-arrow {
     height: 1.3rem;
     border-radius: 50%;
     border: 1.4px solid transparent;
-    
+
     text-align: center;
     font-size: 1rem;
-    
+
     margin-left: .5rem;
     transition: .2s ease-in-out;
 }
@@ -339,7 +340,7 @@ thead th:hover {
 </script>
 @endif
 
-    
+
     <main class="table" id="customers_table">
         <section class="table__header">
             <h1>Demande</h1>
@@ -355,7 +356,7 @@ thead th:hover {
                 </button>
             </a>
         </section>
-    
+
         <section class="table__body">
             <table>
                 <thead>
@@ -369,7 +370,7 @@ thead th:hover {
                     </tr>
                 </thead>
                 <tbody>
-                    @if(auth()->check()) 
+                    @if(auth()->check())
                     @foreach($formulaires as $formulaire)
                     @if(auth()->user()->id === $formulaire->profil_id)
                         <tr>
@@ -383,12 +384,12 @@ thead th:hover {
                                 <form action="{{ route('edit', $formulaire->id) }}" method="get">
                                     @csrf
                                     <button class="btn">Modifier</button>
-                                </form>      
+                                </form>
                                @else
                                <form action="{{ route('pdf', $formulaire->id) }}" method="get">
                                 @csrf
                                 <button class="btn">Télécharger</button>
-                            </form>   
+                            </form>
                                @endif
                             </td>
                             <td>
@@ -408,5 +409,5 @@ thead th:hover {
             </table>
         </section>
     </main>
-    
+
     @endsection

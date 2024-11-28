@@ -1,9 +1,9 @@
 @extends('layout.admin')
-@section('hello')
+@section('admin')
 
 
   <style>
-    
+
 
 @media print {
  .table, .table__body {
@@ -18,13 +18,13 @@
 
 
 main.table {
-    
+
     height: 90vh;
     margin-left: 10px;
     margin-top: 40px;
 
     backdrop-filter: blur(7px);
-    
+
     border-radius: .8rem;
 
     overflow: hidden;
@@ -98,7 +98,7 @@ main.table {
     visibility: hidden;
 }
 
-.table__body:hover::-webkit-scrollbar-thumb{ 
+.table__body:hover::-webkit-scrollbar-thumb{
     visibility: visible;
 }
 
@@ -110,7 +110,7 @@ table {
 td img {
     width: 36px;
     height: 36px;
-  
+
     border-radius: 50%;
     margin-right: .5rem;
     vertical-align: middle;
@@ -204,10 +204,10 @@ thead th span.icon-arrow {
     height: 1.3rem;
     border-radius: 50%;
     border: 1.4px solid transparent;
-    
+
     text-align: center;
     font-size: 1rem;
-    
+
     margin-left: .5rem;
     transition: .2s ease-in-out;
 }
@@ -220,21 +220,58 @@ thead th:hover {
     color: #ffffff;
 }
 
+/* ////////////////////////////////// */
+.btn {
+    color: rgb(17, 3, 108);
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid rgb(17, 3, 108);
+    padding: 10px 20px;
+    font-size: 10px;
+    font-weight: bold;
+    background: transparent;
+    position: relative;
+    transition: all 1s;
+    overflow: hidden;
+    border-radius: 8px;
+  }
 
+  .btn:hover {
+    z-index: 100;
+    color: rgb(255, 255, 255);
+  }
 
+  .btn::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0;
+    left: -40px;
+    transform: skewX(45deg);
+    background-color: rgb(34, 19, 131);
+    transition: all 1s;
+    z-index: -1;
+  }
+
+  .btn:hover::before {
+    width: 160%;
+  }
 
 
 
 
     </style>
-    
-    
-  
 
-    
+
+
+
+
     <main class="table" id="customers_table">
         <section class="table__header">
             <h1>Entreprise</h1>
+
+
         </section>
         <section class="table__body">
             <table id="companies_table">
@@ -246,20 +283,20 @@ thead th:hover {
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Les données des entreprises seront ajoutées ici via JavaScript -->
+                    @foreach ($soldes as $solde)
+                    <tr>
+                        <td>{{$solde->company}}</td>
+                        <td>{{$solde->solde}}</td>
+                        <td>
+                            <a href="{{route('soldes.post',$solde->id)}}" class="btn"> Modifier Solde</a>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </section>
     </main>
-    
-    <!-- Modal pour l'édition du solde -->
-    
-    
-    <script>
-        
-         
-    </script>
-    
 
 </body>
 
+@endsection

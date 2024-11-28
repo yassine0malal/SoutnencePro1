@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-   
+
     <title>Modern Login Page | AsmrProg</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -18,12 +18,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserat', sans-serif;
 }
 
 body{
     background-color: #ffffff;
-    background: linear-gradient(to top, #ffffff,  #08145a);
+    background: linear-gradient(to top, #ffffff,  #007BFF);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,7 +34,7 @@ body{
     width: 150px;
     margin-bottom: 50px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px 0 rgba(27, 16, 117, 0.528);
+    box-shadow: 0px 0px 10px 0 #007BFF;
 }
 
 .container{
@@ -67,7 +67,7 @@ body{
 }
 
 .container button{
-    background-color:  #08145a;
+    background-color:  #007BFF;
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -181,9 +181,9 @@ body{
 }
 
 .toggle{
-    background-color:  #08145a;
+    background-color:  #007BFF;
     height: 100%;
-    background: linear-gradient(to right,  #08145a, #08145a);
+    background: linear-gradient(to right,  #007BFF, #007BFF);
     color: #fff;
     position: relative;
     left: -100%;
@@ -257,40 +257,41 @@ body{
 
 
     <div class="container" id="container">
-       
+
         <div class="form-container sign-up">
-          
-           
-            
+
+            {{-- <i class="fa-solid fa-a"></i> --}}
+
             <form action="{{route('register.post')}}"  method="POST" >
                 @csrf
                 <h1>Create Account</h1>
-               
+
                 <input type="text" placeholder=" FirstName" name="FirstName">
                 <input type="text" placeholder=" LastName" name="LastName">
                 <input type="text" placeholder=" Username" name="Username">
                 <input type="text" placeholder=" Phone" name="Phone">
-        
+
                 <input type="email" placeholder="Email" name="email">
                 <input type="password" placeholder="Password" name="password">
-                
+
                 <button>Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">
-           
-           
+
+
             <form action="{{route('login.post')}}" method="POST" >
                 @csrf
-                
+
                 <h1>Sign In</h1>
-           
+
                 <input type="email" placeholder="Email" name="email">
                 <input type="password" placeholder="Password" name="password">
-                
+                {{-- <a href="{{ route('google-auth')}}" > google</a> --}}
+
                 <button>Sign In</button>
             </form>
-            
+
         </div>
         <div class="toggle-container">
             <div class="toggle">
@@ -308,22 +309,22 @@ body{
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-  
+
+
       <script>
             const container = document.getElementById('container');
       const registerBtn = document.getElementById('register');
       const loginBtn = document.getElementById('login');
-      
+
       registerBtn.addEventListener('click', () => {
           container.classList.add("active");
       });
-      
+
       loginBtn.addEventListener('click', () => {
           container.classList.remove("active");
       });
           </script>
 
       </body>
-      
+
       </html>

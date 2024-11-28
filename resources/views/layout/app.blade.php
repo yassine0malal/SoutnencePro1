@@ -4,11 +4,12 @@
 
 <head>
     <meta charset="UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="assets/css/style.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -27,13 +28,12 @@
 }
 
 :root {
-  --blue:  #08145a;
+  --blue:  #007BFF;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
   --black2: #999;
 }
-
 body {
   min-height: 100vh;
   overflow-x: hidden;
@@ -394,23 +394,31 @@ body {
 
                         </span>
 
-                        
+
                         <span class="title">Entreprises</span>
                     </a>
                 </li>
 
-               
-                   
 
-                
 
-                
+
+
+
+
                 <li>
                     <a href="{{route('logout')}}">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
                         </span>
                         <span class="title">Déconnexion</span>
+                    </a>
+                </li>
+                <li> {{--by me --}}
+                    <a href="{{route('contactUs')}}">
+                        <span class="icon">
+                            <i class="bi bi-person-lines-fill"></i>
+                        </span>
+                        <span class="title">Apropos-Nous</span>
                     </a>
                 </li>
             </ul>
@@ -424,20 +432,19 @@ body {
                 </div>
 
                 <div class="user">
-                    <img src="/images/user.jpg">
-                   
+                    {{-- <img src="/images/user.jpg"> --}}
                 </div>
 
-                
+
             </div>
 
-           
-        
-            
+
+
+
            @yield('hello')
 
     <!-- =========== Scripts =========  -->
-    
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
    <script>

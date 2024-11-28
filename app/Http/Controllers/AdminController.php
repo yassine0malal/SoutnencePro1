@@ -7,6 +7,7 @@ use App\Models\profile;
 use App\Mail\gmailvalid;
 use App\Models\Formulair;
 use App\Mail\gmailrefuser;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,14 @@ use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
-    public function homeAdmin(){
+
+    public function __construct()
+    {
+        $this->middleware('isAdmin')->except(['logoutadmin']);
+    }
+
+    public function homeAdmin()
+{
        return view('admin.homeAdmin');
 }
 public function soldePost(Request $request){
@@ -28,44 +36,48 @@ public function soldePost(Request $request){
 
     if ($request->isMethod('post')) {
         if (auth()->check()) {
-        $Solde = new Solde(); 
+        $Solde = new Solde();
         $request->validate([
             'companyName' => 'unique:Soldes',
       ]);
         $Solde->companyName = $request->input('companyName');
         $Solde->solde = $request->input('solde');
-       
+
         $Solde->save();
         return back()->with('message','Success');
     } else {
-       
+
         return redirect()->route('register');
     }
-    
+
 }
 }
     }
-    
 
-  
+
+
 public function solde(Request $request){
 
 
 return view('admin.solde') ;
 }
 public function liste_solde(Request $request){
-    
+
     $solde = Solde::all();
-    return view('admin.companysolde',compact('solde')) ;
+    $com = Company::all();
+    // dd($com);
+    return view('admin.companysolde',compact('solde','com')) ;
     }
+
     public function edit_solde(Solde $solde){
 
         return view('admin.edit',compact('solde')) ;
-        }
+    }
+
 public function update_solde(Request $request , Solde $Solde){
     if (auth()->check()) {
         $request->validate([
-          
+
             'solde' => 'required',
         ]);
 
@@ -76,13 +88,13 @@ public function update_solde(Request $request , Solde $Solde){
 
     $newSoldeValue = $request->input('solde');
     $Solde->solde = $currentSolde + $newSoldeValue;
-   
+
     $Solde->save();
     return back()->with('message','Success');
 }
 }
 public function user(Request $request){
-    
+
     $demande = profile::orderBy('created_at', 'desc')->get();;
     return view('admin.user',compact('demande')) ;
     }
@@ -90,13 +102,15 @@ public function user(Request $request){
         $profile->delete();
         return back()->with('message', 'User supprimer avec succès.');
     }
-public function demande(Request $request){
-    
+
+public function demande(Request $request)
+{
 
     $profile=profile::with('Formulair')->get();
     $formule=Formulair::with('profile')->where('is_validated',false)->where('is_refuser',false)->get();
     return view('admin.demande',compact('profile','formule'));
-    }
+}
+
     public function logoutadmin()
 {
     session()->flush();
@@ -106,7 +120,7 @@ public function demande(Request $request){
 }
 public function Voirdemmande($id){
     $profile=profile::find($id);
-    
+
     $formule=Formulair::where('profil_id',$id)->where('is_validated',false)->where('is_refuser',false)->get();
     return view ('admin.Voirdemmande',compact('profile','formule'));
 }
@@ -118,34 +132,47 @@ public function arrchive(){
 
 
 public function valid($id, Solde $solde){
-  
+
+    // dd($id);
 $forme=Formulair::findorfail($id);
+// dd($forme);
 $forme->is_validated = true;
 $forme->save();
-$solde = Solde::where('companyName', $forme->company)->first();
-    $solde->solde -= $forme->budget;
+$solde = Company::where('company', $forme->company)->first();
+// dd($solde);
+if($solde->solde >= $forme->budget){
+   $solde->solde -= $forme->budget;
     $solde->save();
+}
+else
+{
+    return back()->withErrors(['budget','Solde insuffisant']);
+}
+
 
 $profile = Profile::find($forme->profil_id);
 
-Mail::to($profile->email)->send(new gmailvalid($profile));
+// Mail::to($profile->email)->send(new gmailvalid($profile));
 
 return back()->with('message','Demmande Valid');
 }
 
 public function refuser($id, Solde $solde){
-  
+
     $forme=Formulair::findorfail($id);
     $forme->is_refuser = true;
+    $company = Company::where('company', $forme->company)->first();
+    $company->solde += $forme->budget;
+    $company->save();
     $forme->save();
- 
-    
+
+
     $profile = Profile::find($forme->profil_id);
-    
-    Mail::to($profile->email)->send(new gmailrefuser($profile));
-    
+// dd($profile,$profile->email);
+    // Mail::to($profile->email)->send(new gmailrefuser($profile));
+
     return back()->with('message','Demmande refuser');
     }
-    
+
 
 }
