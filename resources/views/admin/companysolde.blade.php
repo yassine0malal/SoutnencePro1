@@ -266,6 +266,16 @@
 
         </style>
 
+@if(session('message'))
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Valid...",
+            text: @json(session('message')),
+        });
+    </script>
+@endif
+
       <main class="table" id="customers_table">
           <section class="table__header">
               <h1>Les changements de soldes des Entreprises </h1>
@@ -295,7 +305,7 @@
 
                             <td>{{ $solde->companyName }}</td>
                             @foreach ($com as $co)
-                            @if ($co->company===$solde->companyName)
+                            @if ($co->company==$solde->companyName)
                             <td style="color:crimson">{{ $solde->solde }}</td>
                             @break
                             @endif

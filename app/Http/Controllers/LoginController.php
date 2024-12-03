@@ -39,7 +39,7 @@ public function registerPost(Request $request){
 
     // Sauvegarder l'utilisateur
     $profile->save();
-    // Mail::to($profile->email)->send(new gmail($profile));
+    Mail::to($profile->email)->send(new gmail($profile));
     return back()->with('success','successfully');
 }
 public function login(){

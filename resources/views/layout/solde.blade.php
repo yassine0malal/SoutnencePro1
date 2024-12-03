@@ -263,7 +263,15 @@ thead th:hover {
 
     </style>
 
-
+@if(session('message'))
+    <script>
+        Swal.fire({
+            icon: "success",
+            title: "Valid...",
+            text: @json(session('message')),
+        });
+    </script>
+@endif
 
 
 

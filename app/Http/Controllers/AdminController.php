@@ -11,7 +11,9 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+// use App\Mail\gmailrefuser;
 
 
 class AdminController extends Controller
@@ -26,6 +28,7 @@ class AdminController extends Controller
 {
        return view('admin.homeAdmin');
 }
+
 public function soldePost(Request $request){
     if (auth()->check()) {
         $request->validate([
@@ -61,11 +64,13 @@ public function solde(Request $request){
 
 return view('admin.solde') ;
 }
+
 public function liste_solde(Request $request){
 
-    $solde = Solde::all();
+    $solde = Solde::orderBy('created_at', 'desc')->get();
     $com = Company::all();
-    // dd($com);
+    // dd($forme,$com,$solde);
+
     return view('admin.companysolde',compact('solde','com')) ;
     }
 
@@ -77,10 +82,8 @@ public function liste_solde(Request $request){
 public function update_solde(Request $request , Solde $Solde){
     if (auth()->check()) {
         $request->validate([
-
             'solde' => 'required',
         ]);
-
 
 
 
@@ -122,8 +125,14 @@ public function Voirdemmande($id){
     $profile=profile::find($id);
 
     $formule=Formulair::where('profil_id',$id)->where('is_validated',false)->where('is_refuser',false)->get();
+    // $so  = new Solde();
+    // $forme = Formulair::where('profil_id',$id)->where('is_validated',false)->where('is_refuser',false)->get();
+    // $so->companyName = $request->input('company');
+    // $so->solde = -$request->input('budget');
+    // $so->save();
     return view ('admin.Voirdemmande',compact('profile','formule'));
 }
+
 public function arrchive(){
     $profile=profile::with('Formulair')->get();
     $formule=Formulair::with('profile')->get();
@@ -133,9 +142,8 @@ public function arrchive(){
 
 public function valid($id, Solde $solde){
 
-    // dd($id);
 $forme=Formulair::findorfail($id);
-// dd($forme);
+
 $forme->is_validated = true;
 $forme->save();
 $solde = Company::where('company', $forme->company)->first();
@@ -151,8 +159,7 @@ else
 
 
 $profile = Profile::find($forme->profil_id);
-
-// Mail::to($profile->email)->send(new gmailvalid($profile));
+Mail::to($profile->email)->send(new gmailvalid($profile));
 
 return back()->with('message','Demmande Valid');
 }
@@ -161,15 +168,11 @@ public function refuser($id, Solde $solde){
 
     $forme=Formulair::findorfail($id);
     $forme->is_refuser = true;
-    $company = Company::where('company', $forme->company)->first();
-    $company->solde += $forme->budget;
-    $company->save();
+
     $forme->save();
 
-
     $profile = Profile::find($forme->profil_id);
-// dd($profile,$profile->email);
-    // Mail::to($profile->email)->send(new gmailrefuser($profile));
+    Mail::to($profile->email)->send(new gmailrefuser($profile));
 
     return back()->with('message','Demmande refuser');
     }

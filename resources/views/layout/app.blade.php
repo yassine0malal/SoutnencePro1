@@ -378,14 +378,14 @@ body {
                       <span class="title">Votre Demandes</span>
                   </a>
               </li>
-              <li>
+              {{-- <li>
                 <a href="{{route('tablesolde')}}">
                     <span class="icon">
                       <ion-icon name="cash-outline"></ion-icon>
                     </span>
                     <span class="title">Soldes Des L'entreprises</span>
                 </a>
-            </li>
+            </li> --}}
 
                 <li>
                     <a href="{{route('company')}}">

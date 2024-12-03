@@ -132,12 +132,12 @@
                 <option @if($formulair->company == 'Sofamel') selected @endif>Sofamel</option>
                 <option @if($formulair->company == 'Bitmar') selected @endif>Bitmar</option>
                 <option @if($formulair->company == 'Lux Lighting') selected @endif>Lux Lighting</option>
-                <option @if($formulair->company == 'Marcont') selected @endif>Marcont</option>
                 <option @if($formulair->company == 'Madin Technologies') selected @endif>Madin Technologies</option>
                 <option @if($formulair->company == 'Madin Immobilier') selected @endif>Madin Immobilier</option>
+                {{-- <option @if($formulair->company == 'Marcont') selected @endif>Marcont</option>
                 <option @if($formulair->company == 'Neoplus') selected @endif>Neoplus</option>
                 <option @if($formulair->company == 'Switch Electric') selected @endif>Switch Electric</option>
-                <option @if($formulair->company == 'PEC Group') selected @endif>PEC Group</option>
+                <option @if($formulair->company == 'PEC Group') selected @endif>PEC Group</option> --}}
             </select>
         </div>
 
@@ -147,15 +147,21 @@
         </div>
         <div class="input-box">
             <label>Collaborator</label>
-            <input name="collaborator" type="text" placeholder="Collaborator" value="{{ $formulair->collaborator }}" 
+            <input name="collaborator" type="text" placeholder="Collaborator" value="{{ $formulair->collaborator }}"
             />
         </div>
 
         <div class="column">
             <div class="input-box">
                 <label>Destination</label>
-                <input name="destination" type="text" placeholder="Destination" value="{{ $formulair->destination }}" 
-                 />
+                <div class="select-box">
+                    <select name="destination" >
+                        <option hidden>Destination</option>
+                        <option @if($formulair->destination == 'Boznika') selected @endif>Boznika</option>
+                        <option @if($formulair->destination == 'Cartiee indestriual medionna') selected @endif>Cartiee indestriual medionna</option>
+                        <option @if($formulair->destination == 'Rabat') selected @endif>Rabat</option>
+                    </select>
+                </div>
             </div>
             <div class="input-box">
                 <label>Date</label>
@@ -173,6 +179,5 @@
 </section>
 
   @endsection
-  
- 
-  
+
+

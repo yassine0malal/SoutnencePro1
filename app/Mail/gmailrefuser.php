@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class gmailrefuser extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    public $user ;
     /**
      * Create a new message instance.
      *
@@ -31,7 +31,7 @@ class gmailrefuser extends Mailable
     {
         return new Envelope(
             subject: 'Demmande refuser',
-        );
+         );
     }
 
     /**
@@ -45,6 +45,13 @@ class gmailrefuser extends Mailable
             view: 'emails.refuser',
         );
     }
+
+    // public function build(){
+    //     return $this->from('malalyassin6@gmail.com', 'Demmande refuser')
+    //     ->subject($this->user['subject'])
+    //     ->view('emails.refuser')
+    //     ->with('user',$this->user);
+    // }
 
     /**
      * Get the attachments for the message.

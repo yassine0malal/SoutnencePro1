@@ -48,7 +48,7 @@ public function edit(Formulair $formulair){
     return view('client.edit', compact('formulair'));
 }
 
-public function update(Request $request, Formulair $formulair ,Company $company) {
+public function update(Request $request, $id,Company $company) {
     if (auth()->check()) {
         $request->validate([
             'company' => 'required',
@@ -56,26 +56,22 @@ public function update(Request $request, Formulair $formulair ,Company $company)
             'collaborator' => 'required',
             'destination' => 'required',
             'description' => 'required',
-            'date' => 'required|date',  
+            'date' => 'required|date',
         ]);
-        // $commpany = Company::where('company',$request->input('company'))->first();
-        // dd($commpany->solde);
-        // dd($commpany);
-        // $company->solde = $companySolde - $request->input('budget');
+
         // Récupérez le solde de l'entreprise sélectionnée
         $companySolde = $company->where('company', $request->input('company'))->value('solde');
+        $cmd =Formulair::where('id', $id)->first();
+        if ($request->input('budget') <= $companySolde&&!empty($cmd)) {
 
-        if ($request->input('budget') <= $companySolde) {
-            $formulaire = new Formulair();
-            $formulaire->company = $request->input('company');
-            $formulaire->budget = $request->input('budget');
-            $formulaire->collaborator = $request->input('collaborator');
-            $formulaire->destination = $request->input('destination');
-            $formulaire->date = date("Y-m-d", strtotime($request->input('date')));
-            $formulaire->description = $request->input('description');
-            $formulaire->profil_id = auth()->user()->id;
-            $formulaire->save();
-
+            $cmd->budget = $request->input('budget');
+            $cmd->collaborator = $request->input('collaborator');
+            $cmd->destination = $request->input('destination');
+            $cmd->date = date("Y-m-d", strtotime($request->input('date')));
+            $cmd->description = $request->input('description');
+            $cmd->profil_id = auth()->user()->id;
+            $cmd->company = $request->input('company');
+            $cmd->save();
             return back()->with('message', 'Formulaire mis à jour avec succès.');
         } else {
             return back()->withErrors(['budget' => 'Le budget doit être inférieur au solde disponible.']);
@@ -97,37 +93,12 @@ public function logout()
 
 public function tablesolde(Request $request){
 
-    // $solde = Solde::all(); // the origin line  and the return one and all of those lines are from me
     $solde = Company::all();
-// dd($soldeOrigin);
-
-//     $sold = Solde::pluck('solde', 'companyName');
-//     $formulair = Formulair::pluck('budget','company');
-// $form = Formulair::all();
-
-
-//     foreach($form as $for)
-//     {
-
-//     //     dump($for->company);
-
-//         foreach($solde as $sol)
-//         {
-//             if($for->company == $sol->companyName)
-//             {
-//                dump('2');
-//             }
-//         }
-//     }
-
-
-
-
     return view('client.companysolde',compact('solde')) ;
-    }
+}
 
-    public function contactUs()
-    {
+public function contactUs(){
         return view ('client.contactUs');
-    }
+}
+
 }

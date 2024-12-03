@@ -76,3 +76,5 @@ Route::get('/contactUs',[ClientController::class , 'contactUs'])->name('contactU
 
 // Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
 // Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
+Route::get('/send',[AdminController::class,'refuser'])->name('send');
+

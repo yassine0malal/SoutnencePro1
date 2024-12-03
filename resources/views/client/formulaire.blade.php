@@ -169,13 +169,13 @@ width: 160%;
                 </div>
                 <div class="input-field">
                     <label>Budget</label>
-        <input name="budget" type="text" placeholder="Budget(DH)" />
+        <input name="budget" type="number" placeholder="Budget(DH)" />
                 </div>
 
 
                   <div class="input-field">
                     <label>Collaborateur</label>
-                    <input name="collaborator" type="text" placeholder="Collaborateur" />
+                    <input name="collaborator" type="text" placeholder="Collaborateur" value="{{ Auth::user()->Username }}" readonly />
                 </div>
 
 

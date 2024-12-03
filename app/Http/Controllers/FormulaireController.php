@@ -81,6 +81,11 @@ class FormulaireController extends Controller
                     $formulaire->date = date("Y-m-d", strtotime($request->input('date')));
                     $formulaire->description = $request->input('description');
                     $formulaire->profil_id = auth()->user()->id;
+                    $so  = new Solde();
+                    $so->companyName = $request->input('company');
+                    $so->solde = -$request->input('budget');
+                    $so->save();
+
                     // dd($formulaire);
                     $formulaire->save();
                     return back()->with('message', 'Succès');

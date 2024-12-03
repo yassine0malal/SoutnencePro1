@@ -47,11 +47,12 @@
     </style>
 </head>
 <body>
+
     <div class="email-container">
 
         <div class="content">
             <h1>Demande Refusée</h1>
-            <p>Bonjour {{ $user->username }},</p>
+            <p>Bonjour {{ $user->Username }},</p>
             <p>Nous vous informons que votre demande a été refusée.</p>
             <p>Nous vous prions de bien vouloir contacter notre service  pour plus d'informations.</p>
             <p>Merci de votre compréhension.</p>
